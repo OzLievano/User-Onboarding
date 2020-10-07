@@ -16,6 +16,7 @@ const AdvancedForm = () => {
         password:"",
         terms:false
     })
+
     const validateChange = (e) =>{
         yup.reach(formSchema,e.target.name)
         .validate(
@@ -26,6 +27,15 @@ const AdvancedForm = () => {
         })
         .catch((err)=>{
             setErrors({...errors,[e.target.name]:err.errors[0]})
+        })
+    }
+
+    const submitForm = (e)=>{
+        e.preventDefault();
+        axios
+        .post("https://reqres.in/api/users",formState)
+        .then((resp)=>{
+            console.log(resp)
         })
     }
 
@@ -46,7 +56,7 @@ const AdvancedForm = () => {
         setFormState(newForm);
     }
     return (
-        <form>
+        <form onSubmit={submitForm}>
             <label htmlFor="name">
                 Name 
                 <input
@@ -70,9 +80,9 @@ const AdvancedForm = () => {
             <label htmlFor="pass">
                 Password
                 <input
-                id="pass"
+                id="password"
                 type="password"
-                name="pass"
+                name="password"
                 value={formState.password}
                 onChange= {inputChange}
                 />
@@ -87,7 +97,7 @@ const AdvancedForm = () => {
                 onChange= {inputChange}
                 />
             </label><br/>
-            <button>SUBMIT</button>
+            <button type="submit">SUBMIT</button>
         </form>
     )
 }
