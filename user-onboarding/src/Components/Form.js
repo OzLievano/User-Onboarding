@@ -1,7 +1,14 @@
-import React, { Component } from 'react';
-
+import React, { Component,useState } from 'react';
+import * as yup from 'yup';
+import axios from 'axios';
 
 const AdvancedForm = () => {
+    const [formState,setFormState] = useState({
+        name:"",
+        email:"",
+        password:"",
+        terms:false,
+    })
     return(
         <form>
             <label htmlFor="name">Name</label>
