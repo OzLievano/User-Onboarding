@@ -86,6 +86,7 @@ const AdvancedForm = () => {
     }
     return (
         <Form onSubmit={submitForm}>
+            {serverError && <p className="error">{serverError}</p>}
             <Label htmlFor="name">
                 <FormText>Name</FormText> 
                 <Input
@@ -95,6 +96,7 @@ const AdvancedForm = () => {
                 value={formState.name}
                 onChange= {inputChange}
                 />
+                {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
             </Label><br/>
             <Label htmlFor="email">
                 <FormText>Email </FormText> 
@@ -105,6 +107,9 @@ const AdvancedForm = () => {
                 value={formState.email}
                 onChange= {inputChange}
                 />
+                {errors.email.length > 0 ? (
+          <p className="error">{errors.email}</p>
+        ) : null}
             </Label><br/>
             <Label htmlFor="pass">
                 <FormText>Password</FormText>
@@ -115,6 +120,9 @@ const AdvancedForm = () => {
                 value={formState.password}
                 onChange= {inputChange}
                 />
+                {errors.password.length > 0 ? (
+          <p className="error">{errors.password}</p>
+        ) : null}
             </Label><br/>
             <Label htmlFor="terms">
             <FormText>
@@ -127,8 +135,11 @@ const AdvancedForm = () => {
                 checked={formState.terms}
                 onChange= {inputChange}
                 />
+                {errors.terms.length > 0 ? (
+          <p className="error">{errors.terms}</p>
+        ) : null}
             </Label><br/><br/>
-            <Button type="submit" color="info">SUBMIT</Button>
+            <Button type="submit" color="info" disabled={buttonIsDisabled}>SUBMIT</Button>
             <pre>{JSON.stringify(users, null, 2)}</pre>
         </Form>
     )
