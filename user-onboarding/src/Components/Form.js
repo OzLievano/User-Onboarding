@@ -1,5 +1,6 @@
 import React, { Component,useState,useEffect } from 'react';
 import * as yup from 'yup';
+import {Form, FormGroup,Label, Input,FormText, Button} from 'reactstrap' 
 import axios from 'axios';
 
 const AdvancedForm = () => {
@@ -65,50 +66,50 @@ const AdvancedForm = () => {
         setFormState(newForm);
     }
     return (
-        <form onSubmit={submitForm}>
-            <label htmlFor="name">
+        <Form onSubmit={submitForm}>
+            <Label htmlFor="name">
                 Name 
-                <input
+                <Input
                 id="name"
                 type="text"
                 name="name"
                 value={formState.name}
                 onChange= {inputChange}
                 />
-            </label><br/>
-            <label htmlFor="email">
+            </Label><br/>
+            <Label htmlFor="email">
                 Email 
-                <input
+                <Input
                 id="email"
                 type="text"
                 name="email"
                 value={formState.email}
                 onChange= {inputChange}
                 />
-            </label><br/>
-            <label htmlFor="pass">
+            </Label><br/>
+            <Label htmlFor="pass">
                 Password
-                <input
+                <Input
                 id="password"
                 type="password"
                 name="password"
                 value={formState.password}
                 onChange= {inputChange}
                 />
-            </label><br/>
-            <label htmlFor="terms">
-                Terms & Conditions
-                <input
+            </Label><br/>
+            <Label htmlFor="terms">
+                <Input
                 id="terms"
                 type="checkbox"
                 name="terms"
                 checked={formState.terms}
                 onChange= {inputChange}
                 />
-            </label><br/>
-            <button type="submit">SUBMIT</button>
+                Terms & Conditions
+            </Label><br/>
+            <Button type="submit" color="info">SUBMIT</Button>
             <pre>{JSON.stringify(users, null, 2)}</pre>
-        </form>
+        </Form>
     )
 }
 
