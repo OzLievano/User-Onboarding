@@ -9,6 +9,15 @@ const AdvancedForm = () => {
         password:"",
         terms:false
     })
+
+    const inputChange = (e) =>{
+        e.persist();
+        const newForm = {
+            ...formState,
+            [e.target.name]:e.target.type==="checkbox" ? e.target.checked : e.target.value
+        };
+        setFormState(newForm);
+    }
     return (
         <form>
             <label htmlFor="name">
@@ -17,6 +26,8 @@ const AdvancedForm = () => {
                 id="name"
                 type="text"
                 name="name"
+                value={formState.name}
+                onChange= {inputChange}
                 />
             </label><br/>
             <label htmlFor="email">
@@ -25,6 +36,8 @@ const AdvancedForm = () => {
                 id="email"
                 type="text"
                 name="email"
+                value={formState.email}
+                onChange= {inputChange}
                 />
             </label><br/>
             <label htmlFor="pass">
@@ -33,6 +46,8 @@ const AdvancedForm = () => {
                 id="pass"
                 type="password"
                 name="pass"
+                value={formState.password}
+                onChange= {inputChange}
                 />
             </label><br/>
             <label htmlFor="terms">
@@ -41,6 +56,8 @@ const AdvancedForm = () => {
                 id="terms"
                 type="checkbox"
                 name="terms"
+                checked={formState.terms}
+                onChange= {inputChange}
                 />
             </label><br/>
             <button>SUBMIT</button>
