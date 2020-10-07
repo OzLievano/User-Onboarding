@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import axios from 'axios';
 
 const AdvancedForm = () => {
+
     const [formState,setFormState] = useState({
         name:"",
         email:"",
@@ -10,6 +11,31 @@ const AdvancedForm = () => {
         terms:false,
     })
 
+    const validateChange = (e) => {
+        yup
+        .reach(formSchema,e.target.name)
+        .validate(
+            e.target.type==="checkbox" ? e.target.checked: e.target.value
+        )
+    }
+
+    const inputChange = (e) => {
+        e.persist();
+        // e.target.name --> name of the input that fired the event
+        // e.target.value --> current value of the input that fired the event
+        // e.target.type --> type attribute of the input
+        const newFormState = {
+          ...formState,
+          [e.target.name]:
+            e.target.type === "checkbox" ? e.target.checked : e.target.value
+        };
+    
+        validateChange(e);
+        setFormState(newFormState);
+      };
+    
+  
+    
     // add a schema for form validation 
     const formSchema = yup.object().shape({
         name:yup.string().required("Name is required."),
@@ -24,6 +50,7 @@ const AdvancedForm = () => {
                 type="text"
                 id="name"
                 name="name"
+                value={formState.name}
                 required
             /><br/>
             <label htmlFor="email">Email </label>
@@ -31,6 +58,7 @@ const AdvancedForm = () => {
                 type="email"
                 id="email"
                 name="name"
+                value={formState.email}
                 required
             /><br/>
             <label htmlFor="pass">Password </label>
@@ -38,6 +66,7 @@ const AdvancedForm = () => {
                 type="password"
                 id="pass"
                 name="password"
+                value={formState.password}
                 required
             /><br/>
             <label htmlFor="terms">Terms & Conditions</label>
@@ -45,6 +74,7 @@ const AdvancedForm = () => {
                 type="checkbox"
                 id="terms"
                 name="terms"
+                checked={formState.terms}
                 required
             /><br/>
             <button type="submit">SUBMIT</button>
