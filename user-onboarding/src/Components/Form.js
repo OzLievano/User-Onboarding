@@ -1,6 +1,6 @@
 import React, { Component,useState,useEffect } from 'react';
 import * as yup from 'yup';
-import {Form, FormGroup,Label, Input,FormText, Button} from 'reactstrap' 
+import {Form, FormGroup,Label, Input,FormText, Button,Card,Col,Row, Container} from 'reactstrap' 
 import axios from 'axios';
 
 const AdvancedForm = () => {
@@ -139,8 +139,17 @@ const AdvancedForm = () => {
           <p className="error">{errors.terms}</p>
         ) : null}
             </Label><br/><br/>
-            <Button type="submit" color="info" disabled={buttonIsDisabled}>SUBMIT</Button>
-            <pre>{JSON.stringify(users, null, 2)}</pre>
+            <Button type="submit" className="mb-3" color="info" disabled={buttonIsDisabled}>SUBMIT</Button>
+            <Container>
+            <Row>
+                <Col className="justify-content-md-center" md={12}>
+                    <Card>
+                        <pre>{JSON.stringify(users, null, 2)}</pre>
+                    </Card>
+                </Col>
+            </Row>
+            </Container>
+            
         </Form>
     )
 }
