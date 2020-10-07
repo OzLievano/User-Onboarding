@@ -17,6 +17,8 @@ const AdvancedForm = () => {
         terms:false
     })
 
+    const [users,setUsers] = useState([])
+
     const validateChange = (e) =>{
         yup.reach(formSchema,e.target.name)
         .validate(
@@ -36,6 +38,13 @@ const AdvancedForm = () => {
         .post("https://reqres.in/api/users",formState)
         .then((resp)=>{
             console.log(resp)
+            setUsers(resp.data)
+            setFormState({
+                name:"",
+                email:"",
+                password:"",
+                terms:false
+            })
         })
     }
 
@@ -98,6 +107,7 @@ const AdvancedForm = () => {
                 />
             </label><br/>
             <button type="submit">SUBMIT</button>
+            <pre>{JSON.stringify(users, null, 2)}</pre>
         </form>
     )
 }
