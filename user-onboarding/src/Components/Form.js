@@ -1,4 +1,4 @@
-import React, { Component,useState } from 'react';
+import React, { Component,useState,useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 
@@ -10,6 +10,9 @@ const AdvancedForm = () => {
         password:"",
         terms:false,
     })
+
+    const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
+
 
     const validateChange = (e) => {
         yup
@@ -33,6 +36,18 @@ const AdvancedForm = () => {
         validateChange(e);
         setFormState(newFormState);
       };
+
+      const formSubmit = (e) =>{
+
+      }
+
+      //disabled button until form is valid
+      useEffect(() => {
+        formSchema.isValid(formState).then((valid) => {
+          console.log("is my form valid?", valid);
+          setButtonIsDisabled(!valid);
+        });
+      }, [formState]);
     
   
     
@@ -51,6 +66,7 @@ const AdvancedForm = () => {
                 id="name"
                 name="name"
                 value={formState.name}
+                onChange={inputChange}
                 required
             /><br/>
             <label htmlFor="email">Email </label>
@@ -59,6 +75,7 @@ const AdvancedForm = () => {
                 id="email"
                 name="name"
                 value={formState.email}
+                onChange={inputChange}
                 required
             /><br/>
             <label htmlFor="pass">Password </label>
@@ -67,6 +84,7 @@ const AdvancedForm = () => {
                 id="pass"
                 name="password"
                 value={formState.password}
+                onChange={inputChange}
                 required
             /><br/>
             <label htmlFor="terms">Terms & Conditions</label>
@@ -75,9 +93,10 @@ const AdvancedForm = () => {
                 id="terms"
                 name="terms"
                 checked={formState.terms}
+                onChange={inputChange}
                 required
             /><br/>
-            <button type="submit">SUBMIT</button>
+            <button type="submit" disabled={buttonIsDisabled}>SUBMIT</button>
         </form>
     )
 }
