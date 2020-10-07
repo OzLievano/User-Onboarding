@@ -11,6 +11,8 @@ const AdvancedForm = () => {
         terms:false
     })
 
+    const [serverError, setServerError] = useState("");
+
     const [errors,setErrors] = useState({
         name:"",
         email:"",
@@ -18,7 +20,8 @@ const AdvancedForm = () => {
         terms:false
     })
 
-    const [users,setUsers] = useState([])
+    const [users,setUsers] = useState([]);
+    const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
 
     const validateChange = (e) =>{
         yup.reach(formSchema,e.target.name)
@@ -47,6 +50,9 @@ const AdvancedForm = () => {
                 terms:false
             })
         })
+        .catch((err)=>{
+            setServerError("oops! something happened!");
+        })
     }
 
     const formSchema = yup.object().shape({
@@ -55,6 +61,19 @@ const AdvancedForm = () => {
         password:yup.string(),
         terms:yup.boolean().oneOf([true])
     });
+
+    useEffect(() => {
+        formSchema.isValid(formState).then((valid) => {
+          console.log("is my form valid?", valid);
+    
+          // valid is a boolean
+          // !true === false
+          // !false === true
+          // if the form is valid, and we take the opposite --> we do not want disabled btn
+          // if the form is invalid (false) and we take the opposite (!) --> we will disable the btn
+          setButtonIsDisabled(!valid);
+        });
+      }, [formState]);
 
     const inputChange = (e) =>{
         e.persist();
@@ -68,7 +87,7 @@ const AdvancedForm = () => {
     return (
         <Form onSubmit={submitForm}>
             <Label htmlFor="name">
-                Name 
+                <FormText>Name</FormText> 
                 <Input
                 id="name"
                 type="text"
@@ -78,7 +97,7 @@ const AdvancedForm = () => {
                 />
             </Label><br/>
             <Label htmlFor="email">
-                Email 
+                <FormText>Email </FormText> 
                 <Input
                 id="email"
                 type="text"
@@ -88,7 +107,7 @@ const AdvancedForm = () => {
                 />
             </Label><br/>
             <Label htmlFor="pass">
-                Password
+                <FormText>Password</FormText>
                 <Input
                 id="password"
                 type="password"
@@ -98,6 +117,9 @@ const AdvancedForm = () => {
                 />
             </Label><br/>
             <Label htmlFor="terms">
+            <FormText>
+                Terms & Conditions<br/>
+            </FormText>
                 <Input
                 id="terms"
                 type="checkbox"
@@ -105,8 +127,7 @@ const AdvancedForm = () => {
                 checked={formState.terms}
                 onChange= {inputChange}
                 />
-                Terms & Conditions
-            </Label><br/>
+            </Label><br/><br/>
             <Button type="submit" color="info">SUBMIT</Button>
             <pre>{JSON.stringify(users, null, 2)}</pre>
         </Form>
