@@ -29,6 +29,6 @@ describe("testing for MVP",()=>{
         cy.get('[data-cy="#email"]').type('osvaldoalievano@gmail.com').should('have.value','osvaldoalievano@gmail.com')
         cy.get('[data-cy=password]').type('Haven1235!').should('have.value','Haven1235!')
         cy.get('[data-cy=terms]').check().should('be.checked')
-        cy.get('[data-cy=submit]').click()
+        cy.get('[data-cy=submit]').click().should("have.prop",{isDisabled: false})
     })
 })
