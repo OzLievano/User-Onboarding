@@ -93,6 +93,7 @@ const AdvancedForm = () => {
                 id="name"
                 type="text"
                 name="name"
+                data-cy="#name"
                 value={formState.name}
                 onChange= {inputChange}
                 />
@@ -106,7 +107,7 @@ const AdvancedForm = () => {
                 name="email"
                 value={formState.email}
                 onChange= {inputChange}
-                data-cy="#name"
+                data-cy="#email"
                 />
                 {errors.email.length > 0 ? (
           <p className="error">{errors.email}</p>
