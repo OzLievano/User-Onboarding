@@ -106,6 +106,7 @@ const AdvancedForm = () => {
                 name="email"
                 value={formState.email}
                 onChange= {inputChange}
+                data-cy="#name"
                 />
                 {errors.email.length > 0 ? (
           <p className="error">{errors.email}</p>
