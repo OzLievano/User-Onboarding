@@ -121,6 +121,7 @@ const AdvancedForm = () => {
                 name="password"
                 value={formState.password}
                 onChange= {inputChange}
+                data-cy="password"
                 />
                 {errors.password.length > 0 ? (
           <p className="error">{errors.password}</p>
