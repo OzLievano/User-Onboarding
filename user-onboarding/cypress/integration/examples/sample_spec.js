@@ -31,4 +31,10 @@ describe("testing for MVP",()=>{
         cy.get('[data-cy=terms]').check().should('be.checked')
         cy.get('[data-cy=submit]').click().should("have.prop",{isDisabled: false})
     })
+    it('empty validation',()=>{
+        cy.get('[data-cy="#name"]').should('be.empty')
+        cy.get('[data-cy="#email"]').should('be.empty')
+        cy.get('[data-cy=password]').should('be.empty')
+        cy.get('[data-cy=terms]').should('be.empty')
+    })
 })
