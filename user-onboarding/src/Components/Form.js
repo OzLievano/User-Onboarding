@@ -143,7 +143,7 @@ const AdvancedForm = () => {
           <p className="error">{errors.terms}</p>
         ) : null}
             </Label><br/><br/>
-            <Button type="submit" className="mb-3" color="info" disabled={buttonIsDisabled}>SUBMIT</Button>
+            <Button type="submit" className="mb-3" color="info" disabled={buttonIsDisabled} data-cy="submit">SUBMIT</Button>
             <Container>
             <Row>
                 <Col className="justify-content-md-center" md={12}>
