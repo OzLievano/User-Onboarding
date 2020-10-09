@@ -137,6 +137,7 @@ const AdvancedForm = () => {
                 name="terms"
                 checked={formState.terms}
                 onChange= {inputChange}
+                data-cy="terms"
                 />
                 {errors.terms.length > 0 ? (
           <p className="error">{errors.terms}</p>
